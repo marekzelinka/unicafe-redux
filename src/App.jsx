@@ -10,18 +10,12 @@ function App() {
     <>
       <h1>Give Feedback</h1>
       <div>
-        <button type="button" onClick={() => setGood((good) => good + 1)}>
-          good
-        </button>
-        <button
-          type="button"
+        <Button text="good" onClick={() => setGood((good) => good + 1)} />
+        <Button
+          text="neutral"
           onClick={() => setNeutral((neutral) => neutral + 1)}
-        >
-          neutral
-        </button>
-        <button type="button" onClick={() => setBad((bad) => bad + 1)}>
-          bad
-        </button>
+        />
+        <Button text="bad" onClick={() => setBad((bad) => bad + 1)} />
       </div>
       <h2>Stats</h2>
       {all ? (
@@ -35,25 +29,36 @@ function App() {
 
 export default App
 
+function Button({ text, onClick }) {
+  return (
+    <button type="button" onClick={onClick}>
+      {text}
+    </button>
+  )
+}
+
 function Statistics({ good, neutral, bad, all }) {
   let average = (good - bad) / all
   let positive = good / all
 
   return (
     <dl>
-      <dt>good</dt>
-      <dd>{formatDecimal(good)}</dd>
-      <dt>neutral</dt>
-      <dd>{formatDecimal(neutral)}</dd>
-      <dt>bad</dt>
-      <dd>{formatDecimal(bad)}</dd>
-      <dt>all</dt>
-      <dd>{formatDecimal(all)}</dd>
-      <dt>average</dt>
-      <dd>{formatDecimal(average)}</dd>
-      <dt>positive</dt>
-      <dd>{formatPercentage(positive)}</dd>
+      <StatisticLine text="good" value={formatDecimal(good)} />
+      <StatisticLine text="neutral" value={formatDecimal(neutral)} />
+      <StatisticLine text="bad" value={formatDecimal(bad)} />
+      <StatisticLine text="all" value={formatDecimal(all)} />
+      <StatisticLine text="average" value={formatDecimal(average)} />
+      <StatisticLine text="positive" value={formatPercentage(positive)} />
     </dl>
+  )
+}
+
+function StatisticLine({ text, value }) {
+  return (
+    <>
+      <dt>{text}</dt>
+      <dd>{value}</dd>
+    </>
   )
 }
 
