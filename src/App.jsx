@@ -42,23 +42,25 @@ function Statistics({ good, neutral, bad, all }) {
   let positive = good / all
 
   return (
-    <dl>
-      <StatisticLine text="good" value={formatDecimal(good)} />
-      <StatisticLine text="neutral" value={formatDecimal(neutral)} />
-      <StatisticLine text="bad" value={formatDecimal(bad)} />
-      <StatisticLine text="all" value={formatDecimal(all)} />
-      <StatisticLine text="average" value={formatDecimal(average)} />
-      <StatisticLine text="positive" value={formatPercentage(positive)} />
-    </dl>
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={formatDecimal(good)} />
+        <StatisticLine text="neutral" value={formatDecimal(neutral)} />
+        <StatisticLine text="bad" value={formatDecimal(bad)} />
+        <StatisticLine text="all" value={formatDecimal(all)} />
+        <StatisticLine text="average" value={formatDecimal(average)} />
+        <StatisticLine text="positive" value={formatPercentage(positive)} />
+      </tbody>
+    </table>
   )
 }
 
 function StatisticLine({ text, value }) {
   return (
-    <>
-      <dt>{text}</dt>
-      <dd>{value}</dd>
-    </>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
