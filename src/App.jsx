@@ -4,9 +4,6 @@ function App() {
   let [good, setGood] = useState(0)
   let [neutral, setNeutral] = useState(0)
   let [bad, setBad] = useState(0)
-  let all = good + neutral + bad
-  let average = (good - bad) / all
-  let positive = good / all
 
   return (
     <>
@@ -26,25 +23,35 @@ function App() {
         </button>
       </div>
       <h2>Stats</h2>
-      <dl>
-        <dt>good</dt>
-        <dd>{formatDecimal(good)}</dd>
-        <dt>neutral</dt>
-        <dd>{formatDecimal(neutral)}</dd>
-        <dt>bad</dt>
-        <dd>{formatDecimal(bad)}</dd>
-        <dt>all</dt>
-        <dd>{formatDecimal(all)}</dd>
-        <dt>average</dt>
-        <dd>{formatDecimal(average)}</dd>
-        <dt>positive</dt>
-        <dd>{formatPercentage(positive)}</dd>
-      </dl>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </>
   )
 }
 
 export default App
+
+function Statistics({ good, neutral, bad }) {
+  let all = good + neutral + bad
+  let average = (good - bad) / all
+  let positive = good / all
+
+  return (
+    <dl>
+      <dt>good</dt>
+      <dd>{formatDecimal(good)}</dd>
+      <dt>neutral</dt>
+      <dd>{formatDecimal(neutral)}</dd>
+      <dt>bad</dt>
+      <dd>{formatDecimal(bad)}</dd>
+      <dt>all</dt>
+      <dd>{formatDecimal(all)}</dd>
+      <dt>average</dt>
+      <dd>{formatDecimal(average)}</dd>
+      <dt>positive</dt>
+      <dd>{formatPercentage(positive)}</dd>
+    </dl>
+  )
+}
 
 function formatDecimal(value) {
   return value.toLocaleString('en-US', {
