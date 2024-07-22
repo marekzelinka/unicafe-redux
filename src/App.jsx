@@ -4,6 +4,7 @@ function App() {
   let [good, setGood] = useState(0)
   let [neutral, setNeutral] = useState(0)
   let [bad, setBad] = useState(0)
+  let all = good + neutral + bad
 
   return (
     <>
@@ -23,15 +24,18 @@ function App() {
         </button>
       </div>
       <h2>Stats</h2>
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      {all ? (
+        <Statistics good={good} neutral={neutral} bad={bad} all={all} />
+      ) : (
+        <div>No feedback given</div>
+      )}
     </>
   )
 }
 
 export default App
 
-function Statistics({ good, neutral, bad }) {
-  let all = good + neutral + bad
+function Statistics({ good, neutral, bad, all }) {
   let average = (good - bad) / all
   let positive = good / all
 
