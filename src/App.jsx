@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 function App() {
-  let [good, setGood] = useState(0)
-  let [neutral, setNeutral] = useState(0)
-  let [bad, setBad] = useState(0)
-  let all = good + neutral + bad
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const all = good + neutral + bad
 
   return (
     <>
@@ -38,8 +38,8 @@ function Button({ text, onClick }) {
 }
 
 function Statistics({ good, neutral, bad, all }) {
-  let average = (good - bad) / all
-  let positive = good / all
+  const average = (good - bad) / all
+  const positive = good / all
 
   return (
     <table>
