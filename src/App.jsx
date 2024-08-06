@@ -1,21 +1,17 @@
-import { useState } from 'react'
-
-function App() {
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+function App({ store }) {
+  const { good, neutral, bad } = store.getState()
   const all = good + neutral + bad
 
   return (
     <>
       <h1>Give Feedback</h1>
       <div>
-        <Button text="good" onClick={() => setGood((good) => good + 1)} />
+        <Button text="good" onClick={() => store.dispatch({ type: 'GOOD' })} />
         <Button
           text="neutral"
-          onClick={() => setNeutral((neutral) => neutral + 1)}
+          onClick={() => store.dispatch({ type: 'NEUTRAL' })}
         />
-        <Button text="bad" onClick={() => setBad((bad) => bad + 1)} />
+        <Button text="bad" onClick={() => store.dispatch({ type: 'BAD' })} />
       </div>
       <h2>Stats</h2>
       {all ? (
