@@ -1,23 +1,24 @@
 function App({ store }) {
-  const { good, neutral, bad } = store.getState()
-  const all = good + neutral + bad
+  const { good, ok, bad } = store.getState()
+  const all = good + ok + bad
 
   return (
     <>
       <h1>Give Feedback</h1>
       <div>
         <Button text="good" onClick={() => store.dispatch({ type: 'GOOD' })} />
-        <Button
-          text="neutral"
-          onClick={() => store.dispatch({ type: 'NEUTRAL' })}
-        />
+        <Button text="ok" onClick={() => store.dispatch({ type: 'OK' })} />
         <Button text="bad" onClick={() => store.dispatch({ type: 'BAD' })} />
+        <Button
+          text="reset stats"
+          onClick={() => store.dispatch({ type: 'ZERO' })}
+        />
       </div>
       <h2>Stats</h2>
       {all ? (
-        <Statistics good={good} neutral={neutral} bad={bad} all={all} />
+        <Statistics good={good} ok={ok} bad={bad} all={all} />
       ) : (
-        <div>No feedback given</div>
+        <em>No feedback given</em>
       )}
     </>
   )
@@ -33,7 +34,7 @@ function Button({ text, onClick }) {
   )
 }
 
-function Statistics({ good, neutral, bad, all }) {
+function Statistics({ good, ok, bad, all }) {
   const average = (good - bad) / all
   const positive = good / all
 
@@ -41,7 +42,7 @@ function Statistics({ good, neutral, bad, all }) {
     <table>
       <tbody>
         <StatisticLine text="good" value={formatDecimal(good)} />
-        <StatisticLine text="neutral" value={formatDecimal(neutral)} />
+        <StatisticLine text="ok" value={formatDecimal(ok)} />
         <StatisticLine text="bad" value={formatDecimal(bad)} />
         <StatisticLine text="all" value={formatDecimal(all)} />
         <StatisticLine text="average" value={formatDecimal(average)} />
